@@ -35,11 +35,9 @@ Features
 - Consistent coding with EditorConfig_.
 - Badges from Shields.io_.
 
-.. _CircleCI: https://circleci.com/
 .. _Codecov: https://codecov.io/
 .. _EditorConfig: http://editorconfig.org/
 .. _Keep a CHANGELOG: http://keepachangelog.com/
-.. _Pipenv: https://pipenv.readthedocs.io/
 .. _PyPI: https://pypi.python.org/pypi
 .. _Pylint: https://www.pylint.org/
 .. _Shields.io: http://shields.io/
@@ -228,8 +226,8 @@ Push the created git tag which will trigger a CircleCI publish job.
 
 ... _bumpversion: https://github.com/peritus/bumpversion
 
-CircleCI
---------
+CircleCI Setup
+--------------
 
 *CircleCI should already be configured: this section is for reference only.*
 
