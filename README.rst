@@ -36,11 +36,11 @@ Features
 - Badges from Shields.io_.
 
 .. _Codecov: https://codecov.io/
-.. _EditorConfig: http://editorconfig.org/
-.. _Keep a CHANGELOG: http://keepachangelog.com/
+.. _EditorConfig: https://editorconfig.org/
+.. _Keep a CHANGELOG: https://keepachangelog.com/
 .. _PyPI: https://pypi.python.org/pypi
 .. _Pylint: https://www.pylint.org/
-.. _Shields.io: http://shields.io/
+.. _Shields.io: https://shields.io/
 .. _pytest: https://docs.pytest.org/
 .. _setuptools: https://pythonhosted.org/setuptools/.
 
