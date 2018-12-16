@@ -10,7 +10,7 @@ with open('README.rst', 'r') as f:
 
 setup(
     name='makenew-pypackage',
-    version='0.0.0',
+    version='1.0.0',
     author='Evan Sosenko',
     author_email='razorx@evansosenko.com',
     packages=find_packages(exclude=['docs']),
