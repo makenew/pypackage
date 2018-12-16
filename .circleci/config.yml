@@ -1,0 +1,141 @@
+---
+version: 2.1
+
+executors:
+  python:
+    parameters:
+      tag:
+        type: string
+        default: '3'
+    working_directory: ~/build
+    docker:
+      - image: python:<< parameters.tag >>
+
+commands:
+  setup:
+    description: Setup environment
+    parameters:
+      is_alpine:
+        type: boolean
+        default: false
+    steps:
+      - when:
+          condition: << parameters.is_alpine >>
+          steps:
+            - run:
+                name: Install Alpine Linux build dependencies
+                command: apk add --no-cache ca-certificates git make openssh-client
+      - run:
+          name: Install Pipenv
+          command: pip install pipenv
+      - checkout
+      - when:
+          condition: << parameters.is_alpine >>
+          steps:
+            - run:
+                name: Save Alpine Linux version
+                command: |
+                  echo "alpine: $(cat /etc/alpine-release)" >> .versions
+      - run:
+          name: Save Python and Pipenv versions
+          command: |
+            echo "python: ${PYTHON_VERSION}" >> .versions
+            echo "pipenv: $(pipenv --version)" >> .versions
+            cat .versions
+  install:
+    description: Install dependencies
+    parameters:
+      save_cache:
+        type: boolean
+        default: true
+    steps:
+      - restore_cache:
+          key: pipenv-cache-{{ arch }}-{{ checksum ".versions" }}-
+      - run:
+          name: Install dependencies
+          command: pipenv install --deploy --dev
+      - when:
+          condition: << parameters.save_cache >>
+          steps:
+            - save_cache:
+                key: pipenv-cache-{{ arch }}-{{ checksum ".versions" }}-{{ epoch }}
+                paths: ~/.cache/pipenv
+jobs:
+  test:
+    description: Test Python package
+    parameters:
+      tag:
+        type: string
+        default: latest
+      is_alpine:
+        type: boolean
+        default: false
+      upload_coverage:
+        type: boolean
+        default: false
+    executor:
+      name: python
+      tag: << parameters.tag >>
+    steps:
+      - setup:
+          is_alpine: << parameters.is_alpine >>
+      - install
+      - run:
+          name: Test package
+          command: make test
+      - run:
+          name: Build package
+          command: make build
+      - when:
+          condition: << parameters.upload_coverage >>
+          steps:
+            - run:
+                name: Upload coverage to Codecov
+                command: |
+                  if [[ -n "${CODECOV_TOKEN}" ]]; then
+                    pipenv install --dev codecov
+                    pipenv run codecov
+                  fi
+  publish:
+    description: Publish Python package
+    executor:
+      name: python
+      tag: '3'
+    steps:
+      - setup
+      - install
+      - run:
+          name: Build package
+          command: make build
+      - deploy:
+          name: Publish package
+          command: make publish
+
+references:
+  version_tags: &version_tags
+    tags:
+      only: /^v.*/
+  filters: &filters
+    filters:
+      <<: *version_tags
+
+workflows:
+  default:
+    jobs:
+      - test:
+          name: test
+          upload_coverage: true
+          <<: *filters
+      - test:
+          name: test-alpine
+          tag: '3-alpine'
+          is_alpine: true
+          <<: *filters
+      - publish:
+          filters:
+            branches:
+              ignore: /.*/
+            <<: *version_tags
+          requires:
+            - test
+            - test-alpine
