@@ -224,7 +224,7 @@ Publishing
 Use the bumpversion_ command to release a new version.
 Push the created git tag which will trigger a CircleCI publish job.
 
-... _bumpversion: https://github.com/peritus/bumpversion
+.. _bumpversion: https://github.com/peritus/bumpversion
 
 CircleCI Setup
 --------------
