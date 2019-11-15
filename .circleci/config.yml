@@ -6,7 +6,7 @@ executors:
     parameters:
       tag:
         type: string
-        default: '3'
+        default: '3.7'
     working_directory: ~/build
     docker:
       - image: python:<< parameters.tag >>
@@ -24,10 +24,15 @@ commands:
           steps:
             - run:
                 name: Install Alpine Linux build dependencies
-                command: apk add --no-cache ca-certificates git make openssh-client
+                command: apk add --no-cache ca-certificates gcc git make musl-dev openssh-client
       - run:
-          name: Install Pipenv
-          command: pip install pipenv
+          name: Install pipx
+          command: pip install pipx
+      - run:
+          name: Install Poetry
+          command: |
+            pipx install poetry
+            pipx run poetry --version
       - checkout
       - when:
           condition: << parameters.is_alpine >>
@@ -37,10 +42,10 @@ commands:
                 command: |
                   echo "alpine: $(cat /etc/alpine-release)" >> .versions
       - run:
-          name: Save Python and Pipenv versions
+          name: Save Python and Poetry versions
           command: |
             echo "python: ${PYTHON_VERSION}" >> .versions
-            echo "pipenv: $(pipenv --version)" >> .versions
+            echo "poetry: $(pipx run poetry --version)" >> .versions
             cat .versions
   install:
     description: Install dependencies
@@ -50,23 +55,25 @@ commands:
         default: true
     steps:
       - restore_cache:
-          key: pipenv-cache-{{ arch }}-{{ checksum ".versions" }}-
+          key: poetry-cache-{{ arch }}-{{ checksum ".versions" }}-
       - run:
           name: Install dependencies
-          command: pipenv install --deploy --dev
+          command: pipx run poetry install
       - when:
           condition: << parameters.save_cache >>
           steps:
             - save_cache:
-                key: pipenv-cache-{{ arch }}-{{ checksum ".versions" }}-{{ epoch }}
-                paths: ~/.cache/pipenv
+                key: poetry-cache-{{ arch }}-{{ checksum ".versions" }}-{{ epoch }}
+                paths:
+                  - ~/.cache/pip
+                  - ~/.cache/pypoetry
 jobs:
   test:
     description: Test Python package
     parameters:
       tag:
         type: string
-        default: latest
+        default: '3.7'
       is_alpine:
         type: boolean
         default: false
@@ -82,10 +89,16 @@ jobs:
       - install
       - run:
           name: Test package
-          command: make test
+          command: |
+            export PATH=$HOME/.local/bin:$PATH
+            ls $HOME/.local/bin
+            echo $PATH
+            make test
       - run:
           name: Build package
-          command: make build
+          command: |
+            export PATH=$HOME/.local/bin:$PATH
+            make build
       - when:
           condition: << parameters.upload_coverage >>
           steps:
@@ -93,23 +106,27 @@ jobs:
                 name: Upload coverage to Codecov
                 command: |
                   if [[ -n "${CODECOV_TOKEN}" ]]; then
-                    pipenv install --dev codecov
-                    pipenv run codecov
+                    pipx run poetry add --dev codecov
+                    pipx run poetry run codecov
                   fi
   publish:
     description: Publish Python package
     executor:
       name: python
-      tag: '3'
+      tag: '3.7'
     steps:
       - setup
       - install
       - run:
           name: Build package
-          command: make build
+          command: |
+            export PATH=$HOME/.local/bin:$PATH
+            make build
       - deploy:
           name: Publish package
-          command: make publish
+          command: |
+            export PATH=$HOME/.local/bin:$PATH
+            make publish
 
 references:
   version_tags: &version_tags
@@ -128,7 +145,7 @@ workflows:
           <<: *filters
       - test:
           name: test-alpine
-          tag: '3-alpine'
+          tag: '3.7-alpine'
           is_alpine: true
           <<: *filters
       - publish:

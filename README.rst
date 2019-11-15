@@ -26,7 +26,7 @@ Features
 ~~~~~~~~
 
 - Package management with setuptools_ and publishing to PyPI_.
-- Secure dependency management with Pipenv_.
+- Secure dependency management with Poetry_.
 - Linting with Pylint_.
 - pytest_ helps you write better programs.
 - Code coverage reporting with Codecov_.
@@ -92,8 +92,13 @@ Bootstrapping a New Project
 
    ::
 
-     $ pipenv install --dev
-     $ pipenv run bumpversion patch
+     $ cat pyproject.toml | grep 'python = ".*"' | cut -d '"' -f 2 > .python-version
+     $ pyenv install $(cat .python-version)
+     $ pyenv virtualenv $(cat .python-version) $(basename $(pwd))
+     $ echo $(basename $(pwd)) > .python-version
+     $ pyenv activate
+     $ poetry install
+     $ poetry run bumpversion patch
      $ git push
      $ git push --tags
 
@@ -142,7 +147,7 @@ Install it with
 
 ::
 
-    $ pipenv install makenew_pypackage
+    $ poetry install makenew_pypackage
 
 If you are writing a Python package which will depend on this,
 add this to your requirements in ``setup.py``.
@@ -160,7 +165,12 @@ Quickstart
 
     $ git clone https://github.com/makenew/pypackage.git
     $ cd pypackage
-    $ pipenv install --dev
+    $ cat pyproject.toml | grep 'python = ".*"' | cut -d '"' -f 2 > .python-version
+    $ pyenv install $(cat .python-version)
+    $ pyenv virtualenv $(cat .python-version) $(basename $(pwd))
+    $ echo $(basename $(pwd)) > .python-version
+    $ pyenv activate
+    $ poetry install
 
 Run each command below in a separate terminal window:
 
@@ -185,15 +195,26 @@ Clone the project with
 Requirements
 ~~~~~~~~~~~~
 
-You will need `Python 3`_ with Pipenv_.
+You will need `Python 3`_ with pyenv_ and Poetry_.
+
+Install Python and create and use a new virtualenv (if one does not yet exist) with
+
+::
+
+    $ cat pyproject.toml | grep 'python = ".*"' | cut -d '"' -f 2 > .python-version
+    $ pyenv install $(cat .python-version)
+    $ pyenv virtualenv $(cat .python-version) $(basename $(pwd))
+    $ echo $(basename $(pwd)) > .python-version
+    $ pyenv activate
 
 Install the development dependencies with
 
 ::
 
-    $ pipenv install --dev
+    $ poetry install
 
-.. _Pipenv: https://pipenv.readthedocs.io/
+.. _Poetry: https://poetry.eustace.io/
+.. _pyenv: https://github.com/pyenv/pyenv
 .. _Python 3: https://www.python.org/
 
 Tests
@@ -237,7 +258,7 @@ The following environment variables must be set on CircleCI_:
 - ``TWINE_PASSWORD``: Password for publishing on PyPI.
 - ``CODECOV_TOKEN``: Codecov token for uploading coverage reports (optional).
 
-These may be set manually or by running the script ``./circleci/envvars.sh``.
+These may be set manually or by running the script ``./.circleci/envvars.sh``.
 
 .. _CircleCI: https://circleci.com/
 
