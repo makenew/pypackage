@@ -25,7 +25,7 @@ Bootstrap a new Python_ package in less than a minute.
 Features
 ~~~~~~~~
 
-- Package management with setuptools_ and publishing to PyPI_.
+- Publishing to PyPI_.
 - Secure dependency management with Poetry_.
 - Linting with Pylint_.
 - pytest_ helps you write better programs.
@@ -42,7 +42,6 @@ Features
 .. _Pylint: https://www.pylint.org/
 .. _Shields.io: https://shields.io/
 .. _pytest: https://docs.pytest.org/
-.. _setuptools: https://pythonhosted.org/setuptools/.
 
 Bootstrapping a New Project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -148,9 +147,6 @@ Install it with
 ::
 
     $ poetry install makenew_pypackage
-
-If you are writing a Python package which will depend on this,
-add this to your requirements in ``setup.py``.
 
 .. _makenew_pypackage: https://pypi.python.org/pypi/makenew-pypackage
 .. _Python Package Index (PyPI): https://pypi.python.org/

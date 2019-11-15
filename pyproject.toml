@@ -21,7 +21,6 @@ pytest-cov = "^2.8"
 pytest-incremental = "^0.5.0"
 pytest-runner = "^5.2"
 pytest-watch = "^4.2"
-setuptools-lint = "^0.6.0"
 twine = "^2.0"
 wheel = "^0.33.6"
 
