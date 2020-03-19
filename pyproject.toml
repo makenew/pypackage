@@ -9,7 +9,7 @@ homepage = "https://github.com/makenew/pypackage"
 repository = "https://github.com/makenew/pypackage"
 
 [tool.poetry.dependencies]
-python = "3.7.5"
+python = "3.8.2"
 
 [tool.poetry.dev-dependencies]
 bumpversion = "^0.5.3"
@@ -25,5 +25,5 @@ twine = "^2.0"
 wheel = "^0.33.6"
 
 [build-system]
-requires = ["poetry>=0.12"]
+requires = ["poetry>=1.0"]
 build-backend = "poetry.masonry.api"
