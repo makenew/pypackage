@@ -24,15 +24,16 @@ commands:
           steps:
             - run:
                 name: Install Alpine Linux build dependencies
-                command: apk add --no-cache ca-certificates gcc git make musl-dev openssh-client
-      - run:
-          name: Install pipx
-          command: pip install pipx
+                command: apk add --no-cache ca-certificates curl gcc git make musl-dev openssh-client
       - run:
           name: Install Poetry
           command: |
-            pipx install poetry
-            pipx run poetry --version
+            export POETRY_VERSION=1.0.5
+            export POETRY_HOME=$HOME/.local/share/poetry
+            export PATH=$HOME/.local/share/poetry/bin:$PATH
+            mkdir -p $POETRY_HOME
+            curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+            poetry --version
       - checkout
       - when:
           condition: << parameters.is_alpine >>
@@ -44,8 +45,9 @@ commands:
       - run:
           name: Save Python and Poetry versions
           command: |
+            export PATH=$HOME/.local/share/poetry/bin:$PATH
             echo "python: ${PYTHON_VERSION}" >> .versions
-            echo "poetry: $(pipx run poetry --version)" >> .versions
+            echo "poetry: $(poetry --version)" >> .versions
             cat .versions
   install:
     description: Install dependencies
@@ -58,7 +60,9 @@ commands:
           key: poetry-cache-{{ arch }}-{{ checksum ".versions" }}-
       - run:
           name: Install dependencies
-          command: pipx run poetry install
+          command: |
+            export PATH=$HOME/.local/share/poetry/bin:$PATH
+            poetry install
       - when:
           condition: << parameters.save_cache >>
           steps:
@@ -90,12 +94,12 @@ jobs:
       - run:
           name: Test package
           command: |
-            export PATH=$HOME/.local/bin:$PATH
+            export PATH=$HOME/.local/share/poetry/bin:$PATH
             make test
       - run:
           name: Build package
           command: |
-            export PATH=$HOME/.local/bin:$PATH
+            export PATH=$HOME/.local/share/poetry/bin:$PATH
             make build
       - when:
           condition: << parameters.upload_coverage >>
@@ -103,9 +107,10 @@ jobs:
             - run:
                 name: Upload coverage to Codecov
                 command: |
+                  export PATH=$HOME/.local/share/poetry/bin:$PATH
                   if [[ -n "${CODECOV_TOKEN}" ]]; then
-                    pipx run poetry add --dev codecov
-                    pipx run poetry run codecov
+                    poetry add --dev codecov
+                    poetry run codecov
                   fi
   publish:
     description: Publish Python package
@@ -118,12 +123,12 @@ jobs:
       - run:
           name: Build package
           command: |
-            export PATH=$HOME/.local/bin:$PATH
+            export PATH=$HOME/.local/share/poetry/bin:$PATH
             make build
       - deploy:
           name: Publish package
           command: |
-            export PATH=$HOME/.local/bin:$PATH
+            export PATH=$HOME/.local/share/poetry/bin:$PATH
             make publish
 
 references:
