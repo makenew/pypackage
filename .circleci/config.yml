@@ -24,7 +24,7 @@ commands:
           steps:
             - run:
                 name: Install Alpine Linux build dependencies
-                command: apk add --no-cache ca-certificates curl gcc git make musl-dev openssh-client libffi-dev
+                command: apk add --no-cache ca-certificates curl gcc git make musl-dev openssh-client openssl-dev libffi-dev
       - run:
           name: Install Poetry
           command: |
