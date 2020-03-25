@@ -70,7 +70,7 @@ makenew () {
   find_replace "s/version =.*/version = \"0.0.0\",/g"
   find_replace "s/Python Package Skeleton/${mk_title}/g"
   find_replace "s/Package skeleton for a python module\./${mk_description}/g"
-  find_replace "s/2019 Evan Sosenko/2019 ${mk_author}/g"
+  find_replace "s/2020 Evan Sosenko/2020 ${mk_author}/g"
   find_replace "s/Evan Sosenko/${mk_author}/g"
   find_replace "s/razorx@evansosenko\.com/${mk_email}/g"
   find_replace "s/makenew\/pypackage/${mk_user}\/${mk_repo}/g"
