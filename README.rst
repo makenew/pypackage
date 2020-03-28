@@ -91,11 +91,6 @@ Bootstrapping a New Project
 
    ::
 
-     $ cat pyproject.toml | grep 'python = ".*"' | cut -d '"' -f 2 > .python-version
-     $ pyenv install $(cat .python-version)
-     $ pyenv virtualenv $(cat .python-version) $(basename $(pwd))
-     $ echo $(basename $(pwd)) > .python-version
-     $ pyenv activate
      $ poetry install
      $ poetry run bumpversion patch
      $ git push
@@ -161,11 +156,6 @@ Quickstart
 
     $ git clone https://github.com/makenew/pypackage.git
     $ cd pypackage
-    $ cat pyproject.toml | grep 'python = ".*"' | cut -d '"' -f 2 > .python-version
-    $ pyenv install $(cat .python-version)
-    $ pyenv virtualenv $(cat .python-version) $(basename $(pwd))
-    $ echo $(basename $(pwd)) > .python-version
-    $ pyenv activate
     $ poetry install
 
 Run each command below in a separate terminal window:
@@ -191,17 +181,7 @@ Clone the project with
 Requirements
 ~~~~~~~~~~~~
 
-You will need `Python 3`_ with pyenv_ and Poetry_.
-
-Install Python and create and use a new virtualenv (if one does not yet exist) with
-
-::
-
-    $ cat pyproject.toml | grep 'python = ".*"' | cut -d '"' -f 2 > .python-version
-    $ pyenv install $(cat .python-version)
-    $ pyenv virtualenv $(cat .python-version) $(basename $(pwd))
-    $ echo $(basename $(pwd)) > .python-version
-    $ pyenv activate
+You will need `Python 3`_ and Poetry_.
 
 Install the development dependencies with
 
@@ -210,7 +190,6 @@ Install the development dependencies with
     $ poetry install
 
 .. _Poetry: https://poetry.eustace.io/
-.. _pyenv: https://github.com/pyenv/pyenv
 .. _Python 3: https://www.python.org/
 
 Tests
