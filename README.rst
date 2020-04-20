@@ -28,6 +28,7 @@ Features
 - Publishing to PyPI_.
 - Secure dependency management with Poetry_.
 - Linting with Pylint_.
+- Uncompromising code formatting with Black_.
 - pytest_ helps you write better programs.
 - Code coverage reporting with Codecov_.
 - CircleCI_ ready.
@@ -35,6 +36,7 @@ Features
 - Consistent coding with EditorConfig_.
 - Badges from Shields.io_.
 
+.. _Black: https://black.readthedocs.io/en/stable/
 .. _Codecov: https://codecov.io/
 .. _EditorConfig: https://editorconfig.org/
 .. _Keep a CHANGELOG: https://keepachangelog.com/
