@@ -6,7 +6,7 @@ executors:
     parameters:
       tag:
         type: string
-        default: '3.8'
+        default: '3.8.2'
     working_directory: ~/build
     docker:
       - image: python:<< parameters.tag >>
@@ -77,7 +77,7 @@ jobs:
     parameters:
       tag:
         type: string
-        default: '3.8'
+        default: '3.8.2'
       is_alpine:
         type: boolean
         default: false
@@ -116,7 +116,7 @@ jobs:
     description: Publish Python package
     executor:
       name: python
-      tag: '3.8'
+      tag: '3.8.2'
     steps:
       - setup
       - install
@@ -148,7 +148,7 @@ workflows:
           <<: *filters
       - test:
           name: test-alpine
-          tag: '3.8-alpine'
+          tag: '3.8.2-alpine'
           is_alpine: true
           <<: *filters
       - publish:
