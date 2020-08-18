@@ -229,8 +229,8 @@ using a `workflow_dispatch on GitHub Actions`_.
 
 .. _workflow_dispatch on GitHub Actions: https://github.com/makenew/pypackage/actions?query=workflow%3Aversion
 
-CircleCI Setup
---------------
+CircleCI
+--------
 
 *CircleCI should already be configured: this section is for reference only.*
 
