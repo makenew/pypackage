@@ -224,6 +224,11 @@ Push the created git tag which will trigger a CircleCI publish job.
 
 .. _bump2version: https://github.com/c4urself/bump2version
 
+Publishing may be triggered using on the web
+using a `workflow_dispatch on GitHub Actions`_.
+
+.. _workflow_dispatch on GitHub Actions: https://github.com/makenew/pypackage/actions?query=workflow%3Aversion
+
 CircleCI Setup
 --------------
 
@@ -238,6 +243,20 @@ The following environment variables must be set on CircleCI_:
 These may be set manually or by running the script ``./.circleci/envvars.sh``.
 
 .. _CircleCI: https://circleci.com/
+
+GitHub Actions
+--------------
+
+*GitHub Actions should already be configured: this section is for reference only.*
+
+The following secrets must be set on the GitHub repo.
+
+- ``GPG_PRIVATE_KEY``: The `GPG private key`_.
+- ``GPG_PASSPHRASE``: The GPG key passphrase.
+- ``GIT_USER_NAME``: The name to set for Git commits.
+- ``GIT_USER_EMAIL``: The email to set for Git commits.
+
+.. _GPG private key: https://github.com/marketplace/actions/import-gpg#prerequisites
 
 Contributing
 ------------
