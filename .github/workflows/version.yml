@@ -15,39 +15,39 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-      - name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v2
-        id: import_gpg
-        with:
-          git_user_signingkey: true
-          git_commit_gpgsign: true
-          git_committer_name: ${{ secrets.GIT_USER_NAME }}
-          git_committer_email: ${{ secrets.GIT_USER_EMAIL }}
-        env:
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-          PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-      - name: Setup Python
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.8.5
-      - name: Setup Poetry
-        uses: gr1n/setup-poetry@v2
-      - name: Setup cache
-        uses: actions/cache@v1
-        with:
-          path: ~/.cache/pypoetry/virtualenvs
-          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
-          restore-keys: ${{ runner.os }}-poetry-
-      - name: Set config
+      - name: Setup Git config
         env:
           GH_USER: ${{ secrets.GH_USER }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
           GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
+          GIT_COMMITTER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
         run: |
           git remote set-url --push origin "https://${GH_USER}:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git config user.name "$GIT_USER_NAME"
           git config user.email "$GIT_USER_EMAIL"
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v3
+        id: import_gpg
+        with:
+          git-user-signingkey: true
+          git-commit-gpgsign: true
+          git-committer-name: ${{ secrets.GIT_USER_NAME }}
+          git-committer-email: ${{ secrets.GIT_USER_EMAIL }}
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8.6
+      - name: Setup Poetry
+        uses: gr1n/setup-poetry@v4
+      - name: Setup cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pypoetry/virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+          restore-keys: ${{ runner.os }}-poetry-
       - name: Install dependencies
         run: poetry install
       - name: Cut version
