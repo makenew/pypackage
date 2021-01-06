@@ -1,34 +1,24 @@
 ---
-name: version
+name: format
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: Version to cut
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch: {}
   repository_dispatch:
     types:
-      - version
+      - format
 
 jobs:
-  release:
+  fix:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          persist-credentials: false
-      - name: Setup Git config
-        env:
-          GH_USER: ${{ secrets.GH_USER }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
-          GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
-          GIT_COMMITTER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
-        run: |
-          git remote set-url --push origin "https://${GH_USER}:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          git config user.name "$GIT_USER_NAME"
-          git config user.email "$GIT_USER_EMAIL"
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GH_TOKEN }}
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v3
         id: import_gpg
@@ -53,13 +43,12 @@ jobs:
           restore-keys: ${{ runner.os }}-poetry-
       - name: Install dependencies
         run: poetry install
-      - name: Lint
-        run: make lint
-      - name: Test
-        run: make test
-      - name: Build
-        run: make build
-      - name: Cut version
-        run: |
-          poetry run bump2version --sign-tags ${{ github.event.inputs.version }}${{ github.event.client_payload.version }}
-          git push && git push --tags
+      - name: Format
+        run: make format
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.8.0
+        with:
+          commit_message: Run format
+          commit_user_name: ${{ secrets.GIT_USER_NAME }}
+          commit_user_email: ${{ secrets.GIT_USER_EMAIL }}
+          commit_author: ${{ secrets.GIT_USER_NAME }} <${{ secrets.GIT_USER_EMAIL }}>
