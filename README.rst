@@ -1,17 +1,13 @@
 Python Package Skeleton
 =======================
 
-|PyPI| |Codecov| |CircleCI|
+|PyPI| |GitHub Actions|
 
 .. |PyPI| image:: https://img.shields.io/pypi/v/makenew-pypackage.svg
    :target: https://pypi.python.org/pypi/makenew-pypackage
    :alt: PyPI
-.. |Codecov| image:: https://img.shields.io/codecov/c/github/makenew/pypackage.svg
-   :target: https://codecov.io/gh/makenew/pypackage
-   :alt: Codecov
-.. |CircleCI| image:: https://img.shields.io/circleci/project/github/makenew/pypackage.svg
-   :target: https://circleci.com/gh/makenew/pypackage
-   :alt: CircleCI
+.. |GitHub Actions| image:: https://github.com/makenew/pypackage/workflows/main/badge.svg
+   :alt: GitHub Actions
 
 Package skeleton for an Python module.
 
@@ -31,7 +27,7 @@ Features
 - Uncompromising code formatting with Black_.
 - pytest_ helps you write better programs.
 - Code coverage reporting with Codecov_.
-- CircleCI_ ready.
+- Continuous testing and deployment with `GitHub Actions`_.
 - `Keep a CHANGELOG`_.
 - Consistent coding with EditorConfig_.
 - Badges from Shields.io_.
@@ -39,6 +35,7 @@ Features
 .. _Black: https://black.readthedocs.io/en/stable/
 .. _Codecov: https://codecov.io/
 .. _EditorConfig: https://editorconfig.org/
+.. _GitHub Actions: https://github.com/features/actions
 .. _Keep a CHANGELOG: https://keepachangelog.com/
 .. _PyPI: https://pypi.python.org/pypi
 .. _Pylint: https://www.pylint.org/
@@ -73,22 +70,17 @@ Bootstrapping a New Project
    remove the git remote, remove upstream tags,
    and stage changes for commit.
 
-4. Create the required CircleCI environment variables with
-
-   ::
-
-       $ .circleci/envvars.sh
-
+4. Create the required GitHub repository secrets
 5. Review, commit, and push the changes to GitHub with
 
    ::
 
      $ git diff --cached
      $ git commit -m "Replace makenew boilerplate"
-     $ git remote add origin git@github.com:<user>/<new-python-package>.git
+     $ git remote add origin git@github.com:<user>/<new-pypackage>.git
      $ git push -u origin master
 
-6. Ensure the CircleCI build passes,
+6. Ensure the GitHub action passes,
    then publish the initial version of the package with
 
    ::
@@ -220,7 +212,7 @@ Publishing
 ~~~~~~~~~~
 
 Use the bump2version_ command to release a new version.
-Push the created git tag which will trigger a CircleCI publish job.
+Push the created git tag which will trigger a GitHub action.
 
 .. _bump2version: https://github.com/c4urself/bump2version
 
@@ -229,32 +221,32 @@ using a `workflow_dispatch on GitHub Actions`_.
 
 .. _workflow_dispatch on GitHub Actions: https://github.com/makenew/pypackage/actions?query=workflow%3Aversion
 
-CircleCI
---------
-
-*CircleCI should already be configured: this section is for reference only.*
-
-The following environment variables must be set on CircleCI_:
-
-- ``TWINE_USERNAME``: Username for publishing on PyPI.
-- ``TWINE_PASSWORD``: Password for publishing on PyPI.
-- ``CODECOV_TOKEN``: Codecov token for uploading coverage reports (optional).
-
-These may be set manually or by running the script ``./.circleci/envvars.sh``.
-
-.. _CircleCI: https://circleci.com/
-
 GitHub Actions
 --------------
 
 *GitHub Actions should already be configured: this section is for reference only.*
 
-The following secrets must be set on the GitHub repo.
+The following repository secrets must be set on GitHub Actions.
 
-- ``GPG_PRIVATE_KEY``: The `GPG private key`_.
-- ``GPG_PASSPHRASE``: The GPG key passphrase.
+- ``TWINE_USERNAME``: Username for publishing on PyPI.
+- ``TWINE_PASSWORD``: Password for publishing on PyPI.
+
+These must be set manually.
+
+Secrets for Optional GitHub Actions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The version and format GitHub actions
+require a user with write access to the repository
+including access to read and write packages.
+Set these additional secrets to enable the action:
+
+- ``GH_TOKEN``: A personal access token for the user.
+- ``GH_USER``: The GitHub user's username.
 - ``GIT_USER_NAME``: The name to set for Git commits.
 - ``GIT_USER_EMAIL``: The email to set for Git commits.
+- ``GPG_PASSPHRASE``: The GPG key passphrase.
+- ``GPG_PRIVATE_KEY``: The `GPG private key`_.
 
 .. _GPG private key: https://github.com/marketplace/actions/import-gpg#prerequisites
 
