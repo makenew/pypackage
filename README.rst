@@ -229,8 +229,7 @@ GitHub Actions
 
 The following repository secrets must be set on GitHub Actions.
 
-- ``TWINE_USERNAME``: Username for publishing on PyPI.
-- ``TWINE_PASSWORD``: Password for publishing on PyPI.
+- ``PYPI_API_TOKEN``: API token for publishing on PyPI.
 
 These must be set manually.
 
