@@ -7,6 +7,7 @@ Python Package Skeleton
    :target: https://pypi.python.org/pypi/makenew-pypackage
    :alt: PyPI
 .. |GitHub Actions| image:: https://github.com/makenew/pypackage/workflows/main/badge.svg
+   :target: https://github.com/makenew/pypackage/actions
    :alt: GitHub Actions
 
 Package skeleton for an Python module.
