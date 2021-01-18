@@ -136,7 +136,7 @@ Install it with
 
 ::
 
-    $ poetry install makenew_pypackage
+    $ poetry add makenew_pypackage
 
 .. _makenew_pypackage: https://pypi.python.org/pypi/makenew-pypackage
 .. _Python Package Index (PyPI): https://pypi.python.org/
