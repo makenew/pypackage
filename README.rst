@@ -10,7 +10,7 @@ Python Package Skeleton
    :target: https://github.com/makenew/pypackage/actions
    :alt: GitHub Actions
 
-Package skeleton for an Python module.
+Package skeleton for a Python module.
 
 Description
 -----------
