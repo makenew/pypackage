@@ -2,11 +2,10 @@ ARG VARIANT="3"
 
 FROM mcr.microsoft.com/vscode/devcontainers/python:${VARIANT}
 
-USER vscode
-
 ARG POETRY_VERSION="1.1.8"
 ARG POETRY_SRC="https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py"
 
+USER vscode
 WORKDIR /home/vscode
 
 RUN curl -fsSL -o install-poetry.py "${POETRY_SRC}" \
