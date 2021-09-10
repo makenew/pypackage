@@ -9,7 +9,7 @@ ARG POETRY_SRC="https://raw.githubusercontent.com/python-poetry/poetry/master/in
 
 WORKDIR /home/vscode
 
-RUN curl -fsSL "${POETRY_SRC}" > install-poetry.py \
+RUN curl -fsSL -o install-poetry.py "${POETRY_SRC}" \
  && python install-poetry.py --version $POETRY_VERSION \
  && rm install-poetry.py
 
