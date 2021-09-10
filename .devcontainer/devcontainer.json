@@ -3,8 +3,8 @@
   "build": {
     "dockerfile": "Dockerfile",
     "args": {
-      "VARIANT": "3.9",
-      "POETRY_VERSION": "1.1.8"
+      "POETRY_VERSION": "1.1.8",
+      "VARIANT": "3.9"
     }
   },
   "remoteEnv": {
