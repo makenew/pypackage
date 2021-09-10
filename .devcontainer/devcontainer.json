@@ -1,0 +1,20 @@
+{
+  "name": "Python",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "PYTHON_VERSION": "3.8",
+      "POETRY_VERSION": "1.1.8"
+    }
+  },
+  "remoteEnv": {
+    "POETRY_VIRTUALENVS_IN_PROJECT": "true",
+    "PATH": "${containerEnv:PATH}:/home/vscode/.local/bin"
+  },
+  "extensions": [
+    "ms-python.python",
+    "EditorConfig.EditorConfig"
+  ],
+  "postCreateCommand": "poetry install",
+  "remoteUser": "vscode"
+}
