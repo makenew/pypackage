@@ -1,6 +1,6 @@
-ARG PYTHON_VERSION="3"
+ARG VARIANT="3"
 
-FROM mcr.microsoft.com/vscode/devcontainers/python:${PYTHON_VERSION}
+FROM mcr.microsoft.com/vscode/devcontainers/python:${VARIANT}
 
 USER vscode
 
