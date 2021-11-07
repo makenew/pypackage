@@ -10,7 +10,7 @@ repository = "https://github.com/makenew/pypackage"
 include = ['poetry.lock']
 
 [tool.poetry.dependencies]
-python = "~3.10.0"
+python = "~3.9.6"
 
 [tool.poetry.dev-dependencies]
 black = "^21.4b1"
