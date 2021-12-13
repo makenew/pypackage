@@ -12,6 +12,7 @@
     "PATH": "${containerEnv:PATH}:/home/vscode/.local/bin"
   },
   "extensions": [
+    "ms-vsliveshare.vsliveshare",
     "ms-python.python",
     "EditorConfig.EditorConfig"
   ],
