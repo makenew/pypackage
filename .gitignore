@@ -5,6 +5,9 @@
 # For more details, visit the project page:
 # https://github.com/github/gitignore
 
+# Temporary development files
+tmp
+
 # Environment versions file
 .versions
 
