@@ -4,7 +4,7 @@
     "dockerfile": "Dockerfile",
     "args": {
       "POETRY_VERSION": "1.1.11",
-      "VARIANT": "3.9"
+      "VARIANT": "3.10"
     }
   },
   "remoteEnv": {
