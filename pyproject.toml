@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "makenew-pypackage"
-version = "3.16.0"
+version = "3.17.0"
 description = "Package skeleton for a Python module."
 authors = ["Evan Sosenko <razorx@evansosenko.com>"]
 license = "MIT"
