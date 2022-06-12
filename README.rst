@@ -130,15 +130,15 @@ Installation
 ------------
 
 This package is registered on the `Python Package Index (PyPI)`_
-as makenew_pypackage_.
+as makenew-pypackage_.
 
 Install it with
 
 ::
 
-    $ poetry add makenew_pypackage
+    $ poetry add makenew-pypackage
 
-.. _makenew_pypackage: https://pypi.python.org/pypi/makenew-pypackage
+.. _makenew-pypackage: https://pypi.python.org/pypi/makenew-pypackage
 .. _Python Package Index (PyPI): https://pypi.python.org/
 
 Development and Testing
