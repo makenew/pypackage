@@ -16,7 +16,7 @@ runs:
   using: composite
   steps:
     - name: Setup Poetry cache
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ~/.local
         key: poetry-${{ inputs.poetry_version }}
