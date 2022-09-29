@@ -15,11 +15,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Setup Python
-      uses: actions/setup-python@v4
-      with:
-        cache: poetry
-        python-version: ${{ inputs.python_version }}
     - name: Setup Poetry cache
       uses: actions/cache@v2
       with:
@@ -29,6 +24,11 @@ runs:
       uses: snok/install-poetry@v1
       with:
         version: ${{ inputs.poetry_version }}
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        cache: poetry
+        python-version: ${{ inputs.python_version }}
     - name: Install dependencies
       shell: bash
       run: poetry install --sync
