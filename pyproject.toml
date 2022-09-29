@@ -7,7 +7,6 @@ license = "MIT"
 readme = "README.rst"
 homepage = "https://github.com/makenew/pypackage"
 repository = "https://github.com/makenew/pypackage"
-include = ['poetry.lock']
 
 [tool.poetry.dependencies]
 python = "^3.10.0"
