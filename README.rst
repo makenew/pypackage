@@ -212,13 +212,13 @@ Publishing
 ~~~~~~~~~~
 
 Use the `poetry version`_ command to release a new version.
-Then run `make version` to commit and push a new git tag which will trigger a GitHub action.
-
-.. _Poetry version: https://python-poetry.org/docs/cli/#version
+Then run `make version` to commit and push a new git tag
+which will trigger a GitHub action.
 
 Publishing may be triggered using on the web
 using a `workflow_dispatch on GitHub Actions`_.
 
+.. _Poetry version: https://python-poetry.org/docs/cli/#version
 .. _workflow_dispatch on GitHub Actions: https://github.com/makenew/pypackage/actions?query=workflow%3Aversion
 
 GitHub Actions
