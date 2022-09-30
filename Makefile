@@ -22,3 +22,5 @@ version:
 	@git commit -m "$(poetry version)"
 	@git tag --sign "v$(poetry version)" -m "$(poetry version)"
 	@git push --follow-tags
+
+.PHONY: build format lint test watch version
