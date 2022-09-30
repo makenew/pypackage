@@ -21,3 +21,4 @@ version:
 	@git add pyproject.toml
 	@git commit -m "$(poetry version)"
 	@git tag --sign "v$(poetry version)" -m "$(poetry version)"
+	@git push --follow-tags

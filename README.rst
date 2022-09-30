@@ -89,7 +89,6 @@ Bootstrapping a New Project
      $ poetry install
      $ poetry version patch
      $ make version
-     $ git push --follow-tags
 
 Updating
 ~~~~~~~~
