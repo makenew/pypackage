@@ -239,7 +239,6 @@ require a user with write access to the repository
 including access to read and write packages.
 Set these additional secrets to enable the action:
 
-- ``GH_USER``: The GitHub user's username.
 - ``GH_TOKEN``: A personal access token for the user.
 - ``GIT_USER_NAME``: The name to set for Git commits.
 - ``GIT_USER_EMAIL``: The email to set for Git commits.
