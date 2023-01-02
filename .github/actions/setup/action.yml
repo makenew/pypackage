@@ -6,7 +6,7 @@ inputs:
   python_version:
     description: The Python version.
     required: false
-    default: '3.10.7'
+    default: '3.11.1'
   poetry_version:
     description: The Poetry version.
     required: false
