@@ -75,7 +75,7 @@ makenew () {
   find_replace "s/${old_title}/${mk_title}/g"
   find_replace "s/${old_title_underline}/${new_title_underline}/g"
   find_replace "s/Package skeleton for a Python module\./${mk_description}/g"
-  find_replace "s/2022 Evan Sosenko/2022 ${mk_author}/g"
+  find_replace "s/2023 Evan Sosenko/2023 ${mk_author}/g"
   find_replace "s/Evan Sosenko/${mk_author}/g"
   find_replace "s/razorx@evansosenko\.com/${mk_email}/g"
   find_replace "s/makenew\/pypackage/${mk_user}\/${mk_repo}/g"
