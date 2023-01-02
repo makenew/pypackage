@@ -8,9 +8,6 @@ on:
     inputs:
       version:
         description: Version to cut
-  repository_dispatch:
-    types:
-      - version
 
 jobs:
   release:
