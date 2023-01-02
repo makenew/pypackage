@@ -10,30 +10,54 @@ jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        python:
+          - '3.10'
+          - '3.11'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup
         uses: ./.github/actions/setup
+        with:
+          python_version: ${{ matrix.python }}
       - name: Test
         run: make test
   lint:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        python:
+          - '3.10'
+          - '3.11'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup
         uses: ./.github/actions/setup
+        with:
+          python_version: ${{ matrix.python }}
       - name: Lint
         run: make lint
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        python:
+          - '3.10'
+          - '3.11'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup
         uses: ./.github/actions/setup
+        with:
+          python_version: ${{ matrix.python }}
       - name: Build
         run: make build
