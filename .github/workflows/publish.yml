@@ -22,7 +22,7 @@ jobs:
         with:
           name: ${{ github.sha }}
           if-no-files-found: error
-          path: dist/*
+          path: dist/
   release:
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -34,7 +34,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{ github.sha }}
-          path: dist/*
+          path: dist/
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
         with:
@@ -57,7 +57,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{ github.sha }}
-          path: dist/*
+          path: dist/
       - name: Publish
         run: poetry publish --skip-existing -u $USERNAME -p $PASSWORD
         env:
