@@ -11,12 +11,17 @@ inputs:
     description: The Poetry version.
     required: false
     default: '1.2.1'
+  install_dependencies:
+    description: Install dependencies.
+    required: false
+    default: 'true'
 
 runs:
   using: composite
   steps:
     - name: Setup Poetry cache
       uses: actions/cache@v3
+      if: inputs.install_dependencies == 'true'
       with:
         path: ~/.local
         key: poetry-${{ inputs.poetry_version }}
@@ -26,12 +31,20 @@ runs:
         version: ${{ inputs.poetry_version }}
     - name: Setup Python
       uses: actions/setup-python@v4
+      if: inputs.install_dependencies == 'true'
       with:
         cache: poetry
         python-version: ${{ inputs.python_version }}
+    - name: Setup Python without cache
+      uses: actions/setup-python@v4
+      if: inputs.install_dependencies == 'false'
+      with:
+        python-version: ${{ inputs.python_version }}
     - name: Check lockfile
+      if: inputs.install_dependencies == 'true'
       shell: bash
       run: poetry lock --check
     - name: Install dependencies
+      if: inputs.install_dependencies == 'true'
       shell: bash
       run: poetry install --sync
