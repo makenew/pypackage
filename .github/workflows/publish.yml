@@ -45,13 +45,14 @@ jobs:
   pypi:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    needs: artifacts
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup
         uses: ./.github/actions/setup
       - name: Publish
-        run: poetry publish --build --skip-existing -u $USERNAME -p $PASSWORD
+        run: poetry publish --skip-existing -u $USERNAME -p $PASSWORD
         env:
           USERNAME: __token__
           PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
