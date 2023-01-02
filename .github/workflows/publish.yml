@@ -53,6 +53,11 @@ jobs:
         uses: ./.github/actions/setup
         with:
           install_dependencies: 'false'
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ github.sha }}
+          path: dist/*
       - name: Publish
         run: poetry publish --skip-existing -u $USERNAME -p $PASSWORD
         env:
