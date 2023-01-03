@@ -6,7 +6,7 @@ Python Package Skeleton
 .. |PyPI| image:: https://img.shields.io/pypi/v/makenew-pypackage.svg
    :target: https://pypi.python.org/pypi/makenew-pypackage
    :alt: PyPI
-.. |GitHub Actions| image:: https://github.com/makenew/pypackage/workflows/main/badge.svg
+.. |GitHub Actions| image:: https://github.com/makenew/pypackage/workflows/check/badge.svg
    :target: https://github.com/makenew/pypackage/actions
    :alt: GitHub Actions
 
