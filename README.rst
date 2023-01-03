@@ -47,7 +47,7 @@ Bootstrapping a New Project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Create an empty (**non-initialized**) repository on GitHub.
-2. Clone the master branch of this repository with
+2. Clone the main branch of this repository with
 
    ::
 
@@ -79,7 +79,7 @@ Bootstrapping a New Project
      $ git diff --cached
      $ git commit -m "Replace makenew boilerplate"
      $ git remote add origin git@github.com:<user>/<new-pypackage>.git
-     $ git push -u origin master
+     $ git push -u origin main
 
 6. Ensure the GitHub action passes,
    then publish the initial version of the package with
@@ -115,7 +115,7 @@ You can then fetch and merge changes with
 ::
 
     $ git fetch --no-tags upstream
-    $ git merge upstream/master
+    $ git merge upstream/main
 
 Changelog
 ^^^^^^^^^
