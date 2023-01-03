@@ -19,26 +19,36 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Setup Poetry cache
+    - name: Setup Poetry cache on Linux
       uses: actions/cache@v3
-      if: inputs.install_dependencies == 'true'
+      if: runner.os == 'Linux'
       with:
-        path: ~/.local
-        key: poetry-${{ inputs.poetry_version }}
-    - name: Setup Poetry
-      uses: snok/install-poetry@v1
+        key: poetry-${{ inputs.poetry_version }}-${{ inputs.python_version }}-${{ runner.os }}-${{ runner.arch }}
+        path: |
+          ~/.local/bin
+          ~/.local/share/pypoetry
+    - name: Setup Poetry cache on macOS
+      uses: actions/cache@v3
+      if: runner.os == 'macOS'
       with:
-        version: ${{ inputs.poetry_version }}
+        key: poetry-${{ inputs.poetry_version }}-${{ inputs.python_version }}-${{ runner.os }}-${{ runner.arch }}
+        path: |
+          ~/.local/bin
+          ~/.local/share/pypoetry
+          ~/Library/Application Support/pypoetry
     - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python_version }}
+    - name: Setup Poetry
+      uses: Gr1N/setup-poetry@v8
+      with:
+        poetry-version: ${{ inputs.poetry_version }}
+    - name: Setup Python with cache
       uses: actions/setup-python@v4
       if: inputs.install_dependencies == 'true'
       with:
         cache: poetry
-        python-version: ${{ inputs.python_version }}
-    - name: Setup Python without cache
-      uses: actions/setup-python@v4
-      if: inputs.install_dependencies == 'false'
-      with:
         python-version: ${{ inputs.python_version }}
     - name: Check lockfile
       if: inputs.install_dependencies == 'true'
