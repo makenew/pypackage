@@ -1,5 +1,5 @@
 ---
-name: check
+name: Check
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
 
 jobs:
   test:
+    name: Test (Python ${{ matrix.python }} on ${{ matrix.os_name }})
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     strategy:
@@ -20,6 +21,13 @@ jobs:
         python:
           - '3.10'
           - '3.11'
+        include:
+          - os: ubuntu-latest
+            os_name: Linux
+          - os: macos-latest
+            os_name: macOS
+          - os: windows-latest
+            os_name: Windows
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -30,6 +38,7 @@ jobs:
       - name: Test
         run: make test
   lint:
+    name: Lint (Python ${{ matrix.python }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
@@ -48,6 +57,7 @@ jobs:
       - name: Lint
         run: make lint
   build:
+    name: Build (Python ${{ matrix.python }} on ${{ matrix.os_name }})
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     strategy:
@@ -60,6 +70,13 @@ jobs:
         python:
           - '3.10'
           - '3.11'
+        include:
+          - os: ubuntu-latest
+            os_name: Linux
+          - os: macos-latest
+            os_name: macOS
+          - os: windows-latest
+            os_name: Windows
     steps:
       - name: Checkout
         uses: actions/checkout@v3
