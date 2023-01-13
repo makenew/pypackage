@@ -3,6 +3,11 @@ name: _publish
 
 on:
   workflow_call:
+    inputs:
+      artifact_name:
+        description: The artifact name.
+        type: string
+        required: true
     secrets:
       registry_token:
         description: The package registry token.
@@ -20,10 +25,10 @@ jobs:
         uses: ./.github/actions/setup
         with:
           install_dependencies: 'false'
-      - name: Download artifacts
+      - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: ${{ github.sha }}
+          name: ${{ inputs.artifact_name }}
           path: dist/
       - name: Publish
         run: poetry publish --skip-existing -u $USERNAME -p $PASSWORD

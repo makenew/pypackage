@@ -58,8 +58,10 @@ jobs:
         run: make lint
   build:
     name: Build (Python ${{ matrix.python }} on ${{ matrix.os_name }})
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 30
+    uses: ./.github/workflows/_build.yml
+    with:
+      python_version: ${{ matrix.python }}
+      runs_on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
@@ -77,12 +79,45 @@ jobs:
             os_name: macOS
           - os: windows-latest
             os_name: Windows
+  install:
+    name: Install (Python ${{ matrix.python }} on ${{ matrix.os_name }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+        python:
+          - '3.10'
+          - '3.11'
+        include:
+          - os: ubuntu-latest
+            os_name: Linux
+          - os: macos-latest
+            os_name: macOS
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup
-        uses: ./.github/actions/setup
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
-          python_version: ${{ matrix.python }}
-      - name: Build
-        run: make build
+          python-version: ${{ matrix.python }}
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ needs.build.outputs.artifact_name }}
+          path: .
+      - name: Get meta
+        id: meta
+        run: echo "whl=$(ls *.whl | head -n1)" >> $GITHUB_OUTPUT
+      - name: Install
+        run: pip install $PACKAGE
+        env:
+          PACKAGE: ${{ steps.meta.outputs.whl }}
+      - name: Import
+        run: echo "import $PACKAGE_IMPORT_NAME" > main.py
+        env:
+          PACKAGE_IMPORT_NAME: makenew_pypackage
+      - name: Run
+        run: python main.py
