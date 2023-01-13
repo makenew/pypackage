@@ -1,5 +1,5 @@
 ---
-name: Publish package
+name: _publish
 
 on:
   workflow_call:

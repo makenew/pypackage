@@ -1,5 +1,5 @@
 ---
-name: Publish version
+name: Publish
 
 run-name: Publish ${{ github.ref_name }}
 
@@ -48,7 +48,7 @@ jobs:
           files: dist/*
   pypi:
     name: PyPI
-    uses: ./.github/workflows/publish-package.yml
+    uses: ./.github/workflows/_publish.yml
     needs: artifacts
     secrets:
       registry_token: ${{ secrets.PYPI_API_TOKEN }}
