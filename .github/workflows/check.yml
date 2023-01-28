@@ -90,6 +90,7 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
+          - windows-latest
         python:
           - '3.10'
           - '3.11'
@@ -98,6 +99,8 @@ jobs:
             os_name: Linux
           - os: macos-latest
             os_name: macOS
+          - os: windows-latest
+            os_name: Windows
     steps:
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -108,16 +111,19 @@ jobs:
         with:
           name: ${{ needs.build.outputs.artifact_name }}
           path: .
-      - name: Get meta
-        id: meta
-        run: echo "whl=$(ls *.whl | head -n1)" >> $GITHUB_OUTPUT
+      - name: Find wheels
+        uses: tj-actions/glob@v16
+        id: wheels
+        with:
+          files: '*.whl'
       - name: Install
-        run: pip install $PACKAGE
-        env:
-          PACKAGE: ${{ steps.meta.outputs.whl }}
-      - name: Import
-        run: echo "import $PACKAGE_IMPORT_NAME" > main.py
-        env:
-          PACKAGE_IMPORT_NAME: makenew_pypackage
+        run: pip install ${{ steps.wheels.outputs.paths }}
+      - name: Create main.py
+        uses: DamianReeves/write-file-action@v1.2
+        with:
+          write-mode: overwrite
+          path: main.py
+          contents: |
+            import makenew_pypackage
       - name: Run
         run: python main.py
