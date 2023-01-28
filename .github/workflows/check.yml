@@ -112,12 +112,8 @@ jobs:
         id: meta
         run: echo "whl=$(ls *.whl | head -n1)" >> $GITHUB_OUTPUT
       - name: Install
-        run: pip install $PACKAGE
-        env:
-          PACKAGE: ${{ steps.meta.outputs.whl }}
+        run: pip install ${{ steps.meta.outputs.whl }}
       - name: Import
-        run: echo "import $PACKAGE_IMPORT_NAME" > main.py
-        env:
-          PACKAGE_IMPORT_NAME: makenew_pypackage
+        run: echo "import makenew_pypackage" > main.py
       - name: Run
         run: python main.py
