@@ -10,6 +10,7 @@ format:
 lint:
 	@poetry run pylint ./makenew_pypackage
 	@poetry run black --check .
+	@poetry run rstcheck README.rst
 
 test:
 	@poetry run pytest --cov=./makenew_pypackage

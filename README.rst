@@ -28,7 +28,7 @@ Features
 - Uncompromising code formatting with Black_.
 - pytest_ helps you write better programs.
 - Code coverage reporting with Codecov_.
-- Continuous testing and deployment with `GitHub Actions`_.
+- Continuous testing and deployment with `GitHub Actions`__.
 - `Keep a CHANGELOG`_.
 - Consistent coding with EditorConfig_.
 - Badges from Shields.io_.
@@ -36,7 +36,7 @@ Features
 .. _Black: https://black.readthedocs.io/en/stable/
 .. _Codecov: https://codecov.io/
 .. _EditorConfig: https://editorconfig.org/
-.. _GitHub Actions: https://github.com/features/actions
+.. __: https://github.com/features/actions
 .. _Keep a CHANGELOG: https://keepachangelog.com/
 .. _PyPI: https://pypi.python.org/pypi
 .. _Pylint: https://www.pylint.org/
@@ -163,14 +163,14 @@ Primary development tasks are defined in the `Makefile`.
 Source Code
 ~~~~~~~~~~~
 
-The `source code`_ is hosted on GitHub.
+The `source code`__ is hosted on GitHub.
 Clone the project with
 
 ::
 
     $ git clone https://github.com/makenew/pypackage.git
 
-.. _source code: https://github.com/makenew/pypackage
+.. __: https://github.com/makenew/pypackage
 
 Requirements
 ~~~~~~~~~~~~

@@ -18,6 +18,7 @@ pytest = "^7.1.1"
 pytest-cov = "^4.0.0"
 pytest-runner = "^6.0.0"
 pytest-watch = "^4.2.0"
+rstcheck = "^6.1.2"
 
 [build-system]
 requires = ["poetry>=1.2"]
