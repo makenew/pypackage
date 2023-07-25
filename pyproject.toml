@@ -11,7 +11,7 @@ repository = "https://github.com/makenew/pypackage"
 [tool.poetry.dependencies]
 python = "^3.10.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 black = "^22.3.0"
 pylint = "^2.4.0"
 pytest = "^7.1.1"
