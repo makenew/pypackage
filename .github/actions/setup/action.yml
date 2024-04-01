@@ -10,7 +10,7 @@ inputs:
   poetry_version:
     description: The Poetry version.
     required: false
-    default: '1.5.1'
+    default: '1.8.2'
   install_dependencies:
     description: Install dependencies.
     required: false
