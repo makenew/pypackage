@@ -9,7 +9,7 @@ homepage = "https://github.com/makenew/pypackage"
 repository = "https://github.com/makenew/pypackage"
 
 [tool.poetry.dependencies]
-python = "^3.10.0"
+python = "^3.11.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.7.0"
