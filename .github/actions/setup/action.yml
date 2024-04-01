@@ -53,7 +53,7 @@ runs:
     - name: Check lockfile
       if: inputs.install_dependencies == 'true'
       shell: bash
-      run: poetry lock --check
+      run: poetry check --lock
     - name: Install dependencies
       if: inputs.install_dependencies == 'true'
       shell: bash
