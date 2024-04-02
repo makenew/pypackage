@@ -65,6 +65,7 @@ jobs:
     with:
       python_version: ${{ matrix.python }}
       runs_on: ${{ matrix.os }}
+      upload_artifact: ${{ matrix.python == '3.11' && matrix.os == 'ubuntu-latest' }}
     strategy:
       fail-fast: false
       matrix:
