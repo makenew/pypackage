@@ -33,7 +33,7 @@ jobs:
             os_name: Windows
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup
         uses: ./.github/actions/setup
         with:
@@ -52,7 +52,7 @@ jobs:
           - '3.12'
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup
         uses: ./.github/actions/setup
         with:
