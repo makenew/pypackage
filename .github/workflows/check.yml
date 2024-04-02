@@ -115,7 +115,7 @@ jobs:
           name: ${{ needs.build.outputs.artifact_name }}
           path: .
       - name: Find wheels
-        uses: tj-actions/glob@v16
+        uses: tj-actions/glob@v21
         id: wheels
         with:
           files: '*.whl'
