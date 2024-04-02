@@ -37,7 +37,7 @@ runs:
           ~/.local/share/pypoetry
           ~/Library/Application Support/pypoetry
     - name: Setup Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ inputs.python_version }}
     - name: Setup Poetry
@@ -45,7 +45,7 @@ runs:
       with:
         poetry-version: ${{ inputs.poetry_version }}
     - name: Setup Python with cache
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       if: inputs.install_dependencies == 'true'
       with:
         cache: poetry
