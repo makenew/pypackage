@@ -122,7 +122,7 @@ jobs:
       - name: Install
         run: pip install ${{ steps.wheels.outputs.paths }}
       - name: Create main.py
-        uses: DamianReeves/write-file-action@v1.2
+        uses: DamianReeves/write-file-action@v1.3
         with:
           write-mode: overwrite
           path: main.py
