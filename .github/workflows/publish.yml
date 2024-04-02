@@ -12,6 +12,8 @@ jobs:
   build:
     name: Build
     uses: ./.github/workflows/_build.yml
+    with:
+      upload_artifact: 'true'
   release:
     name: GitHub Releases
     runs-on: ubuntu-latest
