@@ -26,7 +26,7 @@ jobs:
           name: ${{ needs.build.outputs.artifact_name }}
           path: dist/
       - name: Create GitHub release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           token: ${{ secrets.GH_TOKEN }}
           fail_on_unmatched_files: true
