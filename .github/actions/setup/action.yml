@@ -41,7 +41,7 @@ runs:
       with:
         python-version: ${{ inputs.python_version }}
     - name: Setup Poetry
-      uses: Gr1N/setup-poetry@v8
+      uses: Gr1N/setup-poetry@v9
       with:
         poetry-version: ${{ inputs.poetry_version }}
     - name: Setup Python with cache
