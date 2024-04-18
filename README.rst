@@ -32,11 +32,13 @@ Features
 - `Keep a CHANGELOG`_.
 - Consistent coding with EditorConfig_.
 - Badges from Shields.io_.
+- Start coding instantly with `GitHub Codespaces`_.
 
 .. _Black: https://black.readthedocs.io/en/stable/
 .. _Codecov: https://codecov.io/
 .. _EditorConfig: https://editorconfig.org/
 .. __: https://github.com/features/actions
+.. _GitHub Codespaces: https://github.com/features/codespaces
 .. _Keep a CHANGELOG: https://keepachangelog.com/
 .. _PyPI: https://pypi.python.org/pypi
 .. _Pylint: https://www.pylint.org/
