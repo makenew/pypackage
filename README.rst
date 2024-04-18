@@ -240,7 +240,7 @@ This may be done on the web or using the `GitHub CLI`_ with
 
 .. _Poetry version: https://python-poetry.org/docs/cli/#version
 .. _GitHub CLI: https://cli.github.com/
-.. _version workflow_dispatch on GitHub Actions: https://github.com/seamapi/javascript-http/actions?query=workflow%3Aversion
+.. _version workflow_dispatch on GitHub Actions: https://github.com/makenew/pypackage/actions?query=workflow%3Aversion
 
 GitHub Actions
 --------------
