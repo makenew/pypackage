@@ -59,7 +59,7 @@ makenew () {
   read -p '> GitHub user or organization name (my-user): ' mk_user
   read -p '> GitHub repository name (my-repo): ' mk_repo
 
-  sed_delete README.rst '18,128d'
+  sed_delete README.rst '18,130d'
   sed_insert README.rst '18i' 'TODO'
 
   old_title="Python Package Skeleton"

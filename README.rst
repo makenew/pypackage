@@ -28,7 +28,8 @@ Features
 - Uncompromising code formatting with Black_.
 - pytest_ helps you write better programs.
 - Code coverage reporting with Codecov_.
-- Continuous testing and deployment with `GitHub Actions`__.
+- Fully automated version management and package publishing with semantic-release_.
+- Continuous checks and tests with `GitHub Actions`__.
 - `Keep a CHANGELOG`_.
 - Consistent coding with EditorConfig_.
 - Badges from Shields.io_.
@@ -37,13 +38,14 @@ Features
 .. _Black: https://black.readthedocs.io/en/stable/
 .. _Codecov: https://codecov.io/
 .. _EditorConfig: https://editorconfig.org/
-.. __: https://github.com/features/actions
 .. _GitHub Codespaces: https://github.com/features/codespaces
 .. _Keep a CHANGELOG: https://keepachangelog.com/
 .. _PyPI: https://pypi.python.org/pypi
 .. _Pylint: https://www.pylint.org/
 .. _Shields.io: https://shields.io/
+.. __: https://github.com/features/actions
 .. _pytest: https://docs.pytest.org/
+.. _semantic-release: https://semantic-release.gitbook.io/semantic-release/
 
 Bootstrapping a New Project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -236,7 +238,7 @@ These must be set manually.
 Secrets for Optional GitHub Actions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The version, format, and generate GitHub actions
+The version, format, generate, and semantic-release GitHub actions
 require a user with write access to the repository
 including access to read and write packages.
 Set these additional secrets to enable the action:
