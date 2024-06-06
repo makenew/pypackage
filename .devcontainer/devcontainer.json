@@ -15,6 +15,7 @@
   "extensions": [
     "ms-vsliveshare.vsliveshare",
     "ms-python.python",
+    "charliermarsh.ruff",
     "EditorConfig.EditorConfig"
   ],
   "postCreateCommand": "poetry install",
