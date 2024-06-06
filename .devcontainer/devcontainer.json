@@ -10,7 +10,7 @@
   },
   "remoteEnv": {
     "POETRY_VIRTUALENVS_IN_PROJECT": "true",
-    "PATH": "${containerEnv:PATH}:/home/vscode/.local/bin"
+    "PATH": "${containerEnv:PATH}:/home/vscode/.local/bin:/workspaces/pypackage/.venv/bin"
   },
   "extensions": [
     "ms-vsliveshare.vsliveshare",
