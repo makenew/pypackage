@@ -1,8 +1,3 @@
-# pylint: disable=missing-docstring
-# pylint: disable=unused-import
-
-import pytest
-
 from .todo import todo
 
 
