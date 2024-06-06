@@ -24,8 +24,7 @@ Features
 
 - Publishing to PyPI_.
 - Secure dependency management with Poetry_.
-- Linting with Pylint_.
-- Uncompromising code formatting with Black_.
+- Extremely fast Python linting and code formatting with Ruff_.
 - pytest_ helps you write better programs.
 - Code coverage reporting with Codecov_.
 - Fully automated version management and package publishing with semantic-release__.
@@ -35,13 +34,12 @@ Features
 - Badges from Shields.io_.
 - Start coding instantly with `GitHub Codespaces`_.
 
-.. _Black: https://black.readthedocs.io/en/stable/
 .. _Codecov: https://codecov.io/
 .. _EditorConfig: https://editorconfig.org/
 .. _GitHub Codespaces: https://github.com/features/codespaces
 .. _Keep a CHANGELOG: https://keepachangelog.com/
 .. _PyPI: https://pypi.python.org/pypi
-.. _Pylint: https://www.pylint.org/
+.. _Ruff: https://github.com/astral-sh/ruff
 .. _Shields.io: https://shields.io/
 .. __: https://semantic-release.gitbook.io/semantic-release/
 .. __: https://github.com/features/actions

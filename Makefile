@@ -5,11 +5,12 @@ build:
 	@poetry build
 
 format:
-	@poetry run black .
+	@poetry run ruff check --fix
+	@poetry run ruff format
 
 lint:
-	@poetry run pylint ./makenew_pypackage
-	@poetry run black --check .
+	@poetry run ruff check
+	@poetry run ruff format --check
 	@poetry run rstcheck README.rst
 
 test:
